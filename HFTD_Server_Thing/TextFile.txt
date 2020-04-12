@@ -1,0 +1,48 @@
+﻿ CONNEX STANDARD EUROPEAN QUANTUM SERVER VERSION 1.03
+Port 1 (2/4 QPU):
+    > Initial connect
+    > Connect to port 2 <can only connect one user per tick>
+    > Connect to port 3
+    > Brute force security system 1, 4 damage, costs 1 QPU linked to port 1
+    > Run manual password cracker.exe
+    > Add 2 nodes to Trace Route 1, costs 1 QPU linked to port 1 per node added
+    > Download data
+    > Upload data
+    > Edit data
+    
+Port 2:
+    > Connect to port 1 <can only connect one user per tick>
+    > Connect to port 4
+    > Brute force security system 1, 2 damage, costs no QPU
+    > Brute force security system 1 and 2, 2 damage, costs 1 QPU linked to port 1, 1 tick delay
+    > Link 4 QPU to port 1 (Maximum of 1 times per hack)
+    > Redirect up to 2 QPU from port 3 to port 1
+    > Download data
+    > Upload data
+    > Edit data
+    
+Port 3 (2/4 QPU):
+    > Connect to port 1
+    > Connect to port 4 <can only connect one user per tick>
+    > Brute force security system 2, 4 damage, cost 1 QPU linked to port 3
+    > Add 2 nodes to Trace Route 2, costs 1 QPU linked to port 3 per node added
+    > Download data
+    > Upload data
+    > Edit data
+    
+Port 4:
+    > Connect to port 2
+    > Connect to port 3 <can only connect one user per tick>
+    > Brute force security system 2, 2 damage, costs no QPU
+    > Brute force security system 1 and 2, 1 damage, costs 1 QPU linked to port 3
+    > Link 4 QPU to port 3 (Maximum of 1 times per hack)
+    > Redirect up to 2 QPU from port 1 to port 3
+    > Download data
+    > Upload data
+    > Edit data
+    
+    Nodes in trace route 1 at the start: 5/7
+    Nodes in trace route 2 at the start: 5/7
+
+
+

@@ -1,0 +1,70 @@
+﻿@page
+@model HFTD_Server_Thing.Pages.ServerVisualizerModel
+@{
+    ViewData["Title"] = "ServerVisualizer";
+}
+
+<h1>Server</h1>
+
+<form asp-page-handler="editServer" method="post">
+    <li>Software version: <input type="text" name="editname" value="@Model.Server.SoftwareVersion" /></li>
+    <button class="btn btn-default">Edit Server data</button>
+</form>
+<h2>Ports</h2>
+<form asp-page-handler="addPort" method="post">
+    <button class="btn btn-default">Add Port</button>
+</form>
+@foreach (var x in Model.Server.Ports.OrderBy(p => p.PortNumber))
+{
+    <form asp-page-handler="editPort" method="post">
+        <input type="hidden" name="id" value="@x.PortNumber" />
+        <li>Portnumber: <input type="text" name="editid" value="@x.PortNumber" /></li>
+        <li>QPU: <input type="text" name="editqpu" value="@x.QPU" /> / <input type="text" name="editmaxqpu" value="@x.MaxQPU" /></li>
+        <button class="btn btn-default">Edit this port data</button>
+    </form>
+    <h3>Commands</h3>
+    <form asp-page-handler="addCommand" method="post">
+        <input type="hidden" name="portid" value="@x.PortNumber" />
+        <button class="btn btn-default">Add command</button>
+    </form>
+    @foreach (var c in x.Commands)
+    {
+<form asp-page-handler="editCommand" method="post">
+    <input type="hidden" name="portid" value="@x.PortNumber" />
+    <input type="hidden" name="id" value="@c.CommandId" />
+    <li>
+        Command: <select name="editcommandtype" value ="@c.Type">
+            <option value="InitialConnect">Initial Connect</option>
+            <option value="RedirectQPU">Redirect up to [Amount] QPU from port [CostPort] to port [Target]</option>
+            <option value="LinkQPU">Link [Cost] QPU to port [Target] (Maximum of [MaxPerHack] times per hack)</option>
+            <option value="AddNode">Add [Amount] nodes to Trace Route [Target], costs [Cost] QPU linked to port [CostPort] per node added</option>
+            <option value="ConnectToPort">Connect to port [Target]</option>
+            <option value="ConnectToPortOneUser">Connect to port [Target] (can only connect one user per tick)</option>
+            <option value="BruteForce">Brute force security system [Target], [Amount] damage, costs [Cost] QPU linked to port [CostPort]</option>
+            <option value="DownloadData">Download data</option>
+            <option value="UploadData">Upload data</option>
+            <option value="EditData">Edit data</option>
+            <option value="RunManual">Run manual password cracker.exe</option>
+        </select>
+    </li>
+    <li>Target (port or sec sys): <input type="text" name="edittarget" value="@c.Target" /></li>
+    <li>Secondary Target (e.g. Brute Force system X and Y): <input type="text" name="edittarget2" value="@c.Target2" /></li>
+    <li>Amount (of damage or QPU): <input type="text" name="editamount" value="@c.Amount" /></li>
+    <li>Cost (QPU): <input type="text" name="editcost" value="@c.Cost" /></li>
+    <li>Port of Cost: <input type="text" name="editcostport" value="@c.CostPort" /></li>
+    <li>Max per hack: <input type="text" name="editmaxperhack" value="@c.MaxPerHack" /></li>
+    <li>Current command: @c.CommandText</li>
+    <button class="btn btn-default">Edit this Command data</button>
+</form>
+<form asp-page-handler="removeCommand" method="post">
+    <input type="hidden" name="portid" value="@x.PortNumber" />
+    <input type="hidden" name="id" value="@c.CommandId" />
+    <button class="btn btn-default">Remove command</button>
+</form>
+
+    }
+    <form asp-page-handler="removePort" method="post">
+        <input type="hidden" name="id" value="@x.PortNumber" />
+        <button class="btn btn-default">Remove port</button>
+    </form>
+}
